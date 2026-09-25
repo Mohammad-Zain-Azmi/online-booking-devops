@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Confirmed</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Online Booking
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/bookings">
+                My Bookings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="confirmation-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>
+                Booking Confirmed!
+            </h1>
+
+            <p>
+                Your booking has been successfully created.
+            </p>
+
+
+            <div class="booking-info">
+
+                <p>
+                    <strong>Booking ID:</strong>
+                    {{ booking.booking_id }}
+                </p>
+
+                <p>
+                    <strong>Event:</strong>
+                    {{ event.name }}
+                </p>
+
+                <p>
+                    <strong>Name:</strong>
+                    {{ booking.name }}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ booking.email }}
+                </p>
+
+                <p>
+                    <strong>Seats:</strong>
+                    {{ booking.seats }}
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ event.date }}
+                </p>
+
+                <p>
+                    <strong>Venue:</strong>
+                    {{ event.venue }}
+                </p>
+
+            </div>
+
+
+            <a href="/" class="button">
+                Back to Home
+            </a>
+
+            <a href="/bookings" class="secondary-button">
+                View Bookings
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

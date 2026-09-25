@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Online Booking
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/bookings">
+                My Bookings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <h1>
+            My Bookings
+        </h1>
+
+
+        {% if bookings %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Booking ID
+                        </th>
+
+                        <th>
+                            Event
+                        </th>
+
+                        <th>
+                            Name
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Seats
+                        </th>
+
+                        <th>
+                            Booking Date
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for booking in bookings %}
+
+                    <tr>
+
+                        <td>
+                            {{ booking.booking_id }}
+                        </td>
+
+                        <td>
+                            {{ booking.event_name }}
+                        </td>
+
+                        <td>
+                            {{ booking.name }}
+                        </td>
+
+                        <td>
+                            {{ booking.email }}
+                        </td>
+
+                        <td>
+                            {{ booking.seats }}
+                        </td>
+
+                        <td>
+                            {{ booking.booking_date }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <h2>
+                No bookings yet
+            </h2>
+
+            <p>
+                You haven't made any bookings.
+            </p>
+
+            <a href="/" class="button">
+                Browse Events
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>

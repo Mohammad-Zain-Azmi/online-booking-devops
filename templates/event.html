@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ event.name }}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Online Booking
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/bookings">
+                My Bookings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="details-card">
+
+            <h1>
+                {{ event.name }}
+            </h1>
+
+            <p>
+                <strong>Date:</strong>
+                {{ event.date }}
+            </p>
+
+            <p>
+                <strong>Time:</strong>
+                {{ event.time }}
+            </p>
+
+            <p>
+                <strong>Venue:</strong>
+                {{ event.venue }}
+            </p>
+
+            <p>
+                <strong>Available Seats:</strong>
+                {{ event.available_seats }}
+            </p>
+
+            <h3>
+                Description
+            </h3>
+
+            <p>
+                {{ event.description }}
+            </p>
+
+
+            {% if event.available_seats > 0 %}
+
+            <a href="/book/{{ event.id }}"
+               class="button">
+
+                Book Now
+
+            </a>
+
+            {% else %}
+
+            <p class="sold-out">
+                No seats available
+            </p>
+
+            {% endif %}
+
+            <br><br>
+
+            <a href="/">
+                ← Back to Events
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book {{ event.name }}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Online Booking
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/bookings">
+                My Bookings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="booking-card">
+
+            <h1>
+                Book Your Seats
+            </h1>
+
+            <h2>
+                {{ event.name }}
+            </h2>
+
+            <p>
+                Date: {{ event.date }}
+            </p>
+
+            <p>
+                Venue: {{ event.venue }}
+            </p>
+
+            <p>
+                Available Seats:
+                <strong>
+                    {{ event.available_seats }}
+                </strong>
+            </p>
+
+
+            <form method="POST">
+
+                <label>
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label>
+                    Number of Seats
+                </label>
+
+                <input
+                    type="number"
+                    name="seats"
+                    min="1"
+                    max="{{ event.available_seats }}"
+                    value="1"
+                    required
+                >
+
+
+                <button type="submit">
+                    Confirm Booking
+                </button>
+
+            </form>
+
+
+            <br>
+
+            <a href="/event/{{ event.id }}">
+                ← Back to Event
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
