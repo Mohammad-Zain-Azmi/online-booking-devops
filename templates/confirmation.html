@@ -1,112 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Booking Confirmed</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed - EventBook</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-    <nav class="navbar">
+  <header class="navbar">
+    <div class="container">
+      <div class="brand">EventBook</div>
+      <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('bookings') }}">My Bookings</a>
+      </nav>
+    </div>
+  </header>
 
-        <div class="logo">
-            Online Booking
-        </div>
+  <main class="container">
+    <div class="confirmation-card">
+      <div class="success-icon">✅</div>
+      <h2>Booking Successful!</h2>
 
-        <div class="nav-links">
+      <div class="confirmation-details">
+        <div class="row"><span>Booking ID</span><span>{{ booking.booking_id }}</span></div>
+        <div class="row"><span>Event</span><span>{{ event.name }}</span></div>
+        <div class="row"><span>Customer Name</span><span>{{ booking.name }}</span></div>
+        <div class="row"><span>Email</span><span>{{ booking.email }}</span></div>
+        <div class="row"><span>Seats Booked</span><span>{{ booking.seats }}</span></div>
+        <div class="row"><span>Event Date</span><span>{{ event.date }}</span></div>
+        <div class="row"><span>Venue</span><span>{{ event.venue }}</span></div>
+      </div>
 
-            <a href="/">
-                Home
-            </a>
+      <br>
+      <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+    </div>
+  </main>
 
-            <a href="/bookings">
-                My Bookings
-            </a>
-
-        </div>
-
-    </nav>
-
-
-    <main class="container">
-
-        <div class="confirmation-card">
-
-            <div class="success-icon">
-                ✓
-            </div>
-
-            <h1>
-                Booking Confirmed!
-            </h1>
-
-            <p>
-                Your booking has been successfully created.
-            </p>
-
-
-            <div class="booking-info">
-
-                <p>
-                    <strong>Booking ID:</strong>
-                    {{ booking.booking_id }}
-                </p>
-
-                <p>
-                    <strong>Event:</strong>
-                    {{ event.name }}
-                </p>
-
-                <p>
-                    <strong>Name:</strong>
-                    {{ booking.name }}
-                </p>
-
-                <p>
-                    <strong>Email:</strong>
-                    {{ booking.email }}
-                </p>
-
-                <p>
-                    <strong>Seats:</strong>
-                    {{ booking.seats }}
-                </p>
-
-                <p>
-                    <strong>Date:</strong>
-                    {{ event.date }}
-                </p>
-
-                <p>
-                    <strong>Venue:</strong>
-                    {{ event.venue }}
-                </p>
-
-            </div>
-
-
-            <a href="/" class="button">
-                Back to Home
-            </a>
-
-            <a href="/bookings" class="secondary-button">
-                View Bookings
-            </a>
-
-        </div>
-
-    </main>
+  <footer>
+    &copy; 2026 EventBook. All rights reserved.
+  </footer>
 
 </body>
-
 </html>
