@@ -4,7 +4,7 @@ import uuid
 
 app = Flask(__name__)
 
-DATABASE = "/tmp/bookings.db"
+DATABASE = "/tmp/bookings.db" if os.path.exists("/.dockerenv") else "bookings.db"
 
 
 def get_db():
