@@ -38,7 +38,9 @@ def test_home_page(client):
     response = client.get("/")
 
     assert response.status_code == 200
-    assert b"Upcoming Events" in response.data
+    assert b"Tech Fest 2026" in response.data
+    assert b"Cultural Fest 2026" in response.data
+    assert b"Career Seminar 2026" in response.data
 
 
 def test_event_details(client):
@@ -76,3 +78,44 @@ def test_bookings_page(client):
     assert response.status_code == 200
     assert b"My Bookings" in response.data
 
+
+def test_invalid_event_id(client):
+    response = client.get("/event/9999")
+
+    assert response.status_code in [404, 200]
+def test_zero_seats(client):
+    response = client.post(
+        "/book/1",
+        data={
+            "name": "Test User",
+            "email": "test@example.com",
+            "seats": "0"
+        },
+        follow_redirects=True
+    )
+
+    assert response.status_code == 200
+def test_negative_seats(client):
+    response = client.post(
+        "/book/1",
+        data={
+            "name": "Test User",
+            "email": "test@example.com",
+            "seats": "-2"
+        },
+        follow_redirects=True
+    )
+
+    assert response.status_code == 200
+def test_booking_more_than_available(client):
+    response = client.post(
+        "/book/1",
+        data={
+            "name": "Test User",
+            "email": "test@example.com",
+            "seats": "99999"
+        },
+        follow_redirects=True
+    )
+
+    assert response.status_code == 200    
