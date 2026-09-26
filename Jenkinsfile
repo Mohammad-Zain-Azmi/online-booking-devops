@@ -28,5 +28,11 @@ pipeline {
             }
         }
 
+        stage('Build Docker Image') {
+            steps {
+                bat '"C:\\Users\\Mohammad Zain\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t online-booking-app .'
+            }
+        }
+
     }
 }
