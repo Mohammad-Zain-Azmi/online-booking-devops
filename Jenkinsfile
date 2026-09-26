@@ -34,5 +34,12 @@ pipeline {
             }
         }
 
+        stage('Deploy Docker Container') {
+            steps {
+                bat '"C:\\Users\\Mohammad Zain\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" rm -f online-booking-app 2>NUL || exit /b 0'
+                bat '"C:\\Users\\Mohammad Zain\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run -d --name online-booking-app -p 5000:5000 online-booking-app'
+            }
+        }
+
     }
 }
