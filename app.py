@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
 import sqlite3
 import uuid
+import os
 
 app = Flask(__name__)
 
-DATABASE = "/tmp/bookings.db" if os.path.exists("/.dockerenv") else "bookings.db"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = "/tmp/bookings.db" if os.path.exists("/.dockerenv") else os.path.join(BASE_DIR, "bookings.db")
 
 
 def get_db():
