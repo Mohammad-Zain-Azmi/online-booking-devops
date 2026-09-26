@@ -10,6 +10,13 @@ pipeline {
             }
         }
 
+        stage('Check Docker') {
+            steps {
+                bat 'docker --version'
+                bat 'where docker'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 bat '"C:\\Users\\Mohammad Zain\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pip install -r requirements.txt'
@@ -18,7 +25,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat '"C:\\Users\\Mohammad Zain\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pytest'
+                bat '"C:\\Users\\Mohammad Zain\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pytest
             }
         }
 
