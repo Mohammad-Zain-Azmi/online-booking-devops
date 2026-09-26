@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+bookings.db
+templates-backup/
+.venv/
+venv/
