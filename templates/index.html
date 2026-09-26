@@ -18,17 +18,44 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1 class="page-title">Upcoming Events</h1>
+  <section class="hero">
+    <div class="container">
+      <h1>What's happening<br>on campus</h1>
+      <p>Browse fests, seminars and cultural nights — and grab your seat before it's gone.</p>
+    </div>
+  </section>
 
+  <main class="container">
     <div class="event-grid">
       {% for event in events %}
+      {% set n = event.name|lower %}
+      {% if 'tech' in n %}{% set cat = 'tech' %}
+      {% elif 'cultural' in n %}{% set cat = 'cultural' %}
+      {% else %}{% set cat = 'seminar' %}
+      {% endif %}
       <div class="event-card">
-        <h3>{{ event.name }}</h3>
-        <p class="meta">📅 {{ event.date }} &nbsp; ⏰ {{ event.time }}</p>
-        <p class="meta">📍 {{ event.venue }}</p>
-        <p class="seats">{{ event.available_seats }} seats available</p>
-        <a href="{{ url_for('event_details', event_id=event.id) }}" class="btn btn-primary">View Details</a>
+        <div class="poster-band {{ cat }}">
+          {% if cat == 'tech' %}
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
+          {% elif cat == 'cultural' %}
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+          {% else %}
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>
+          {% endif %}
+        </div>
+        <div class="body">
+          <h3>{{ event.name }}</h3>
+          <p class="meta">{{ event.date }} · {{ event.time }}</p>
+          <p class="meta">{{ event.venue }}</p>
+          {% if event.available_seats == 0 %}
+          <span class="seat-badge none">Sold out</span>
+          {% elif event.available_seats <= 15 %}
+          <span class="seat-badge low">Only {{ event.available_seats }} seats left</span>
+          {% else %}
+          <span class="seat-badge good">{{ event.available_seats }} seats available</span>
+          {% endif %}
+          <a href="{{ url_for('event_details', event_id=event.id) }}" class="btn btn-primary btn-block">View Details</a>
+        </div>
       </div>
       {% else %}
       <p>No upcoming events right now. Please check back later.</p>
@@ -36,9 +63,7 @@
     </div>
   </main>
 
-  <footer>
-    &copy; 2026 EventBook. All rights reserved.
-  </footer>
+  <footer>&copy; 2026 EventBook. All rights reserved.</footer>
 
 </body>
 </html>

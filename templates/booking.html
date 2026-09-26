@@ -36,7 +36,12 @@
 
         <div class="form-group">
           <label for="seats">Number of Seats</label>
-          <input type="number" id="seats" name="seats" min="1" max="{{ event.available_seats }}" value="1" required>
+          <div class="seat-stepper">
+            <button type="button" id="seat-minus" aria-label="Decrease seats">−</button>
+            <input type="number" id="seats" name="seats" min="1" max="{{ event.available_seats }}" value="1" required>
+            <button type="button" id="seat-plus" aria-label="Increase seats">+</button>
+          </div>
+          <p class="seat-hint">{{ event.available_seats }} seats available</p>
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Confirm Booking</button>
@@ -44,9 +49,30 @@
     </div>
   </main>
 
-  <footer>
-    &copy; 2026 EventBook. All rights reserved.
-  </footer>
+  <footer>&copy; 2026 EventBook. All rights reserved.</footer>
+
+  <script>
+    (function () {
+      var input = document.getElementById('seats');
+      var max = parseInt(input.max, 10) || 1;
+      var min = parseInt(input.min, 10) || 1;
+
+      function clamp(v) {
+        if (isNaN(v)) return min;
+        return Math.min(max, Math.max(min, v));
+      }
+
+      document.getElementById('seat-plus').addEventListener('click', function () {
+        input.value = clamp(parseInt(input.value, 10) + 1);
+      });
+      document.getElementById('seat-minus').addEventListener('click', function () {
+        input.value = clamp(parseInt(input.value, 10) - 1);
+      });
+      input.addEventListener('change', function () {
+        input.value = clamp(parseInt(input.value, 10));
+      });
+    })();
+  </script>
 
 </body>
 </html>

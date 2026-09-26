@@ -21,8 +21,12 @@
   <main class="container">
     <h1 class="page-title">All Bookings</h1>
 
+    <div class="table-toolbar">
+      <input type="text" id="booking-search" placeholder="Search by name or event...">
+    </div>
+
     <div class="table-wrapper">
-      <table>
+      <table id="bookings-table">
         <thead>
           <tr>
             <th>Booking ID</th>
@@ -53,9 +57,22 @@
     </div>
   </main>
 
-  <footer>
-    &copy; 2026 EventBook. All rights reserved.
-  </footer>
+  <footer>&copy; 2026 EventBook. All rights reserved.</footer>
+
+  <script>
+    (function () {
+      var search = document.getElementById('booking-search');
+      if (!search) return;
+      var rows = document.querySelectorAll('#bookings-table tbody tr');
+      search.addEventListener('input', function () {
+        var q = search.value.trim().toLowerCase();
+        rows.forEach(function (row) {
+          var text = row.textContent.toLowerCase();
+          row.classList.toggle('hidden-row', q.length > 0 && text.indexOf(q) === -1);
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
